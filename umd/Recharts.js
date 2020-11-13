@@ -39867,12 +39867,13 @@ var generateCategoricalChart = function generateCategoricalChart(_ref) {
             ticks = _this$state9.orderedTooltipTicks,
             axis = _this$state9.tooltipAxis,
             tooltipTicks = _this$state9.tooltipTicks;
-        var activeIndex = Object(_util_ChartUtils__WEBPACK_IMPORTED_MODULE_24__["calculateActiveTickIndex"])(pos, ticks, tooltipTicks, axis);
+        var fallbackTicks = ticks || [];
+        var activeIndex = Object(_util_ChartUtils__WEBPACK_IMPORTED_MODULE_24__["calculateActiveTickIndex"])(pos, fallbackTicks, tooltipTicks, axis);
 
         if (activeIndex >= 0 && tooltipTicks) {
           var activeLabel = tooltipTicks[activeIndex] && tooltipTicks[activeIndex].value;
           var activePayload = this.getTooltipContent(activeIndex, activeLabel);
-          var activeCoordinate = this.getActiveCoordinate(ticks, activeIndex, rangeData);
+          var activeCoordinate = this.getActiveCoordinate(fallbackTicks, activeIndex, rangeData);
           return {
             activeTooltipIndex: activeIndex,
             activeLabel: activeLabel,

@@ -526,12 +526,14 @@ const generateCategoricalChart = ({
       const pos = this.calculateTooltipPos(rangeData);
       const { orderedTooltipTicks: ticks, tooltipAxis: axis, tooltipTicks } = this.state;
 
-      const activeIndex = calculateActiveTickIndex(pos, ticks, tooltipTicks, axis);
+      const fallbackTicks = ticks || [];
+
+      const activeIndex = calculateActiveTickIndex(pos, fallbackTicks, tooltipTicks, axis);
 
       if (activeIndex >= 0 && tooltipTicks) {
         const activeLabel = tooltipTicks[activeIndex] && tooltipTicks[activeIndex].value;
         const activePayload = this.getTooltipContent(activeIndex, activeLabel);
-        const activeCoordinate = this.getActiveCoordinate(ticks, activeIndex, rangeData);
+        const activeCoordinate = this.getActiveCoordinate(fallbackTicks, activeIndex, rangeData);
 
         return {
           activeTooltipIndex: activeIndex,
